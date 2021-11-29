@@ -1,0 +1,3 @@
+import MRA_scr_rig_checkPipeline_v01 as checkPipeline
+reload(checkPipeline)
+checkPipeline.MRA_checkPipeline()
