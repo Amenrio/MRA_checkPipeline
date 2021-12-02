@@ -51,7 +51,7 @@ def check_duplicates(name_obj):
     
         
         
-#Compara con dos diccionarios si las dos primeras partes del objeto cumplen el naming (node_type y Flags), si no lo cumplen, se anaden a las listas de errores
+#Compara con dos diccionarios si las dos primeras partes del objeto cumplen el naming (naming_maya y location_flags), si no lo cumplen, se anaden a las listas de errores
 def check_syntax(name_obj):
     obj = get_nice_name(name_obj)
     if any(obj[0] in t for t in VARS.naming_maya.values()) == False: #si obj[0] existe dentro de los valores del diccionario namingMaya
