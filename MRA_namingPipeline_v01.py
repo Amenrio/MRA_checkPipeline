@@ -133,4 +133,6 @@ def naming_pipeline_ui(error_list,namespace_list,duplicated_list,warning_list):
             cmds.button(label="  {}  ".format(l),bgc=[0,0.781,1],c = command)
     if len(error_list) is 0 and len(duplicated_list) is 0 and len(warning_list) is 0 and len(namespace_list) is 0:
         cmds.text(label="    No se encontraron errores en el Naming    ",h=30, p = layout,bgc=[0.1,1,0.1], fn = "boldLabelFont")
+
+        
     cmds.showWindow(window)
