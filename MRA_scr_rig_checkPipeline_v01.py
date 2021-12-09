@@ -17,11 +17,11 @@ def MRA_checkPipeline():
     window_title = "MRA Check Pipeline"
     window_w = 275
     window_h = 195
-    #Check if winow already exists
+    #Check if window already exists
     if cmds.window(window_name, query=True, exists=True):
         cmds.deleteUI(window_name)
 
-    #Window porperties
+    #Window properties
     window = cmds.window(window_name, sizeable=False, t=window_title,
                          w=window_w, h=window_h, mnb=0, mxb=0, nde=True)
     #Create the Main Layout
