@@ -51,14 +51,17 @@ def check_duplicates(name_obj):
 #Compara con dos diccionarios si las dos primeras partes del objeto cumplen el naming (naming_maya y location_flags), si no lo cumplen, se anaden a las listas de errores
 def check_syntax(name_obj):
     obj = get_nice_name(name_obj)
-    # si obj[0] existe dentro de los valores del diccionario namingMaya
-    if any(obj[0] in t for t in VARS.naming_maya.values()) == False:
-        LE_FLAG_WARNINGS.append(name_obj)
-    # si obj[1] existe dentro de los valores del diccionario locationFlags
-    elif any(obj[1] in n for n in VARS.location_flags.values()) == False:
-        LE_FLAG_WARNINGS.append(name_obj)
-    '''elif obj[1] == VARS.location_flags.get("irrelevant") and obj[0] != VARS.naming_maya.get("geometry") and any(obj[2] in o for o in VARS.group_exceptions) is False:
-        LE_FLAG_WARNINGS.append(name_obj)'''
+    if len(obj)>3:
+        LE_WARNINGS.append(name_obj)
+    else:
+        # si obj[0] existe dentro de los valores del diccionario namingMaya
+        if any(obj[0] in t for t in VARS.naming_maya.values()) == False:
+            LE_WARNINGS.append(name_obj)
+        # si obj[1] existe dentro de los valores del diccionario locationFlags
+        elif any(obj[1] in n for n in VARS.location_flags.values()) == False:
+            LE_WARNINGS.append(name_obj)
+        '''elif obj[1] == VARS.location_flags.get("irrelevant") and obj[0] != VARS.naming_maya.get("geometry") and any(obj[2] in o for o in VARS.group_exceptions) is False:
+            LE_WARNINGS.append(name_obj)'''
 
 
 #Codigo principal
@@ -66,11 +69,11 @@ def check_naming_pipeline(*args):
     global LE_NAMESPACES  # Lista de Namespaces
     global LE_NAMING  # Lista de errores por Naming
     global LE_DUPLICATED  # Lista de elementos con nombres duplicados
-    global LE_FLAG_WARNINGS  # Lista de elementos de warnings de, ejemplo, sintaxis o flags
+    global LE_WARNINGS  # Lista de elementos de warnings de, ejemplo, sintaxis o flags
     LE_NAMESPACES = []
     LE_NAMING = []
     LE_DUPLICATED = []
-    LE_FLAG_WARNINGS = []
+    LE_WARNINGS = []
 
     selection = cmds.select(all=True)
     all_objects = cmds.ls(selection=True, dag=True, transforms=True)
@@ -85,7 +88,7 @@ def check_naming_pipeline(*args):
         check_syntax(o)
 
     naming_pipeline_ui(LE_NAMING, LE_NAMESPACES,
-                       LE_DUPLICATED, LE_FLAG_WARNINGS)
+                       LE_DUPLICATED, LE_WARNINGS)
 
 
 def naming_pipeline_ui(error_list, namespace_list, duplicated_list, warning_list):
