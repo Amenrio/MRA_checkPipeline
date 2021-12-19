@@ -1,25 +1,25 @@
-#MRA script para comprobar Naming de ANIMACION 2
+# MRA script para comprobar Naming de ANIMACION 2
 
 import maya.cmds as cmds
 import MRA_library_variableNames_v01 as VARS  # Libreria de variables
 reload(VARS)
 
 
-#Listas globales
+# Listas globales
 
 ORIENT_JOINTS = []
 
 
-#Filtra el namespace (en caso de existir) y divide el nombre del objeto (en los " _ ") en un array de 3 partes, node_type_flag_name
+# Filtra el namespace (en caso de existir) y divide el nombre del objeto (en los " _ ") en un array de 3 partes, node_type_flag_name
 def get_nice_name(name_obj):
-	if (name_obj.find(':')) > 0:
-		obj = name_obj.split(':')
-		parts_obj = obj[1].split("_")
-		return parts_obj
+    if (name_obj.find(':')) > 0:
+        obj = name_obj.split(':')
+        parts_obj = obj[1].split("_")
+        return parts_obj
 
-	else:
-		parts_obj = name_obj.split("_")
-		return parts_obj
+    else:
+        parts_obj = name_obj.split("_")
+        return parts_obj
 
 # Detecta errores en el naming pipeline, devuelve 0 si detecta algun error
 
@@ -48,23 +48,26 @@ def check_duplicates(name_obj):
         LE_DUPLICATED.append(name_obj)
 
 
-#Compara con dos diccionarios si las dos primeras partes del objeto cumplen el naming (naming_maya y location_flags), si no lo cumplen, se anaden a las listas de errores
+# Compara con dos diccionarios si las dos primeras partes del objeto cumplen el naming (naming_maya y location_flags), si no lo cumplen, se anaden a las listas de errores
 def check_syntax(name_obj):
     obj = get_nice_name(name_obj)
-    if len(obj)>3:
+    if len(obj) > 3:
         LE_WARNINGS.append(name_obj)
     else:
         # si obj[0] existe dentro de los valores del diccionario namingMaya
-        if any(obj[0] in t for t in VARS.naming_maya.values()) == False:
+        if obj[0] not in VARS.naming_maya.values():
             LE_WARNINGS.append(name_obj)
+
         # si obj[1] existe dentro de los valores del diccionario locationFlags
-        elif any(obj[1] in n for n in VARS.location_flags.values()) == False:
+        elif obj[1] not in VARS.location_flags.values():
+
             LE_WARNINGS.append(name_obj)
+
         '''elif obj[1] == VARS.location_flags.get("irrelevant") and obj[0] != VARS.naming_maya.get("geometry") and any(obj[2] in o for o in VARS.group_exceptions) is False:
             LE_WARNINGS.append(name_obj)'''
 
 
-#Codigo principal
+# Codigo principal
 def check_naming_pipeline(*args):
     global LE_NAMESPACES  # Lista de Namespaces
     global LE_NAMING  # Lista de errores por Naming
@@ -96,11 +99,11 @@ def naming_pipeline_ui(error_list, namespace_list, duplicated_list, warning_list
     window_title = "MRA Naming Pipeline"
     window_w = 275
     window_h = 400
-    #Check if winow already exists
+    # Check if winow already exists
     if cmds.window(window_name, query=True, exists=True):
         cmds.deleteUI(window_name)
 
-    #Window porperties
+    # Window porperties
     window = cmds.window(window_name, t=window_title,
                          s=True, mnb=0, mxb=0, rtf=True)
     layout = cmds.scrollLayout(cr=True)
