@@ -1,0 +1,4 @@
+*.pyc
+!/CheckPipeline
+!*.py
+!README.md
