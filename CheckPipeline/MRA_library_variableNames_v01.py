@@ -53,6 +53,7 @@ process_id = {
 ###
 
 
+
 naming_maya = {
     "geometry": "geo",
     "group": "grp",
@@ -92,4 +93,4 @@ location_flags = {
     "down": "d"
 }
 
-group_exceptions = ["geo", "rig", "ctl", "toolkit", "skin", "lct"]
+main_groups = ["geo", "rig", "ctl", "toolkit", "skin", "lct"]
