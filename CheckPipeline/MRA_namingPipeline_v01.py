@@ -63,8 +63,6 @@ def check_syntax(name_obj):
 
             LE_WARNINGS.append(name_obj)
 
-        '''elif obj[1] == VARS.location_flags.get("irrelevant") and obj[0] != VARS.naming_maya.get("geometry") and any(obj[2] in o for o in VARS.group_exceptions) is False:
-            LE_WARNINGS.append(name_obj)'''
 
 
 # Codigo principal

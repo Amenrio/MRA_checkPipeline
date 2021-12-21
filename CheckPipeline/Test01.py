@@ -1,8 +1,8 @@
-import MRA_library_variableNames_v01 as VARS
+import MRA_library_variableNames_v01 as libVars
 
-skinChain = "pene"
-
-if skinChain not in VARS.naming_maya.values() :
-    print("Encontrado")
-else:
-    print("No encontrado")
+c = ["main", "skin", "geo"]
+for x in c:
+    if x not in libVars.pipeline_groups:
+        print("{0} not found".format(x))
+    else:
+        print("{0} found".format(x))

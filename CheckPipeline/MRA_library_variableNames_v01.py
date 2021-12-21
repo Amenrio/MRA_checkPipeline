@@ -92,4 +92,4 @@ location_flags = {
     "down": "d"
 }
 
-group_exceptions = ["geo", "rig", "ctl", "toolkit", "skin", "lct"]
+pipeline_groups = ["geo", "rig", "ctl", "toolkit", "skin", "lct"]
