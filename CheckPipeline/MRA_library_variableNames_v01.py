@@ -93,4 +93,4 @@ location_flags = {
     "down": "d"
 }
 
-main_groups = ["geo", "rig", "ctl", "toolkit", "skin", "lct"]
+pipeline_groups = ["geo", "rig", "ctl", "toolkit", "skin", "lct"]
