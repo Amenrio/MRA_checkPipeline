@@ -11,7 +11,7 @@ def publishGroups():
 
     for o in allObjs:
         obj = NP.get_nice_name(o)
-        if any(obj[2] in t for t in VARS.main_groups) == True:
+        if any(obj[2] in t for t in VARS.pipeline_groups) == True:
             cmds.setAttr( o + ".tx",k=False,cb=False)
             cmds.setAttr( o + ".ty",k=False,cb=False)
             cmds.setAttr( o + ".tz",k=False,cb=False)
