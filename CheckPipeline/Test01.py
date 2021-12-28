@@ -1,8 +1,12 @@
-import MRA_library_variableNames_v01 as libVars
+a = [1,2,2,3,4]
 
-c = ["main", "skin", "geo"]
-for x in c:
-    if x not in libVars.pipeline_groups:
-        print("{0} not found".format(x))
-    else:
-        print("{0} found".format(x))
+def even(x):
+    return x % 2 == 0
+
+
+
+for item in a[:]:
+    if even(item):
+        a.remove(item)
+
+print(a)

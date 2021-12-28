@@ -11,7 +11,7 @@ def undo_publish_groups():
 
     for o in allObjs:
         obj = NP.get_nice_name(o)
-        if any(obj[2] in t for t in VARS.main_groups) == True:
+        if any(obj[2] in t for t in VARS.pipeline_groups) == True:
             cmds.setAttr( o + ".tx",k=True)
             cmds.setAttr( o + ".ty",k=True)
             cmds.setAttr( o + ".tz",k=True)
