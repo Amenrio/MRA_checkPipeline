@@ -1,12 +1,3 @@
-a = [1,2,2,3,4]
+import MRA_library_variableNames_v01 as VARS 
 
-def even(x):
-    return x % 2 == 0
-
-
-
-for item in a[:]:
-    if even(item):
-        a.remove(item)
-
-print(a)
+print(VARS.naming_maya.get("jointSkin") + VARS.separator + VARS.location_flags.get("center") + VARS.separator + "leftArm")

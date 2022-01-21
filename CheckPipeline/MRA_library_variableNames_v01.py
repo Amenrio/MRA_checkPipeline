@@ -54,6 +54,10 @@ process_id = {
 
 
 
+
+separator = "_"
+
+
 naming_maya = {
     "geometry": "geo",
     "group": "grp",

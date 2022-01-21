@@ -22,7 +22,7 @@ def run():
 	
 
 	cmds.showWindow('UIcolorOverride')
-    print rgbValue
+	print(rgbValue)
 
 def changeColor(nColor):
 	objs = cmds.ls(selection = True , transforms = True )

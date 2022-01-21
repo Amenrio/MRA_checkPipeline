@@ -7,8 +7,6 @@ reload(VARS)
 
 # Listas globales
 
-ORIENT_JOINTS = []
-
 
 # Filtra el namespace (en caso de existir) y divide el nombre del objeto (en los " _ ") en un array de 3 partes, node_type_flag_name
 def get_nice_name(name_obj):
