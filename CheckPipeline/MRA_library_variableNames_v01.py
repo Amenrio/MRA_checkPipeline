@@ -52,9 +52,9 @@ process_id = {
 ###  Maya Scene Naming
 ###
 
-<<<<<<< Updated upstream
+
 separator = "_"
->>>>>>> Stashed changes
+
 
 naming_maya = {
     "geometry": "geo",
