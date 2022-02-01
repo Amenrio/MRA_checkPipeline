@@ -7,7 +7,7 @@ Para instalar los scripts es importante llevarlos a una carpeta especifica.
 
 Maya tiene varias carpetas por defecto en la que busca directamente archivos de scripts, asi que vamos a guardar todos estos archivos en una ruta como esta:
 
-"C:\Users\Amenrio\Documents\maya\<Tu Version de Maya>\prefs\scripts"
+"C:\Users\<Tu Nombre de Usuario>\Documents\maya\<Tu Version de Maya>\prefs\scripts"
 
 Una vez tengas los archivos en esa carpeta, cogemos el archivo "LLEVAR_A_MAYA.py" y lo arrastrastramos al script editor, creamos un boton en la shelf y voilà, teneis el script de 
 CheckPipeline.
