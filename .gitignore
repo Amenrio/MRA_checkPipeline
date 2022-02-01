@@ -1,4 +1,5 @@
 *.pyc
 !/CheckPipeline
+Test01.py
 !*.py
 !README.md
