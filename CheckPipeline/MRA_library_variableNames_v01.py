@@ -1,15 +1,44 @@
 #Libreria de variables naming
+def get_nice_name_shapes(name_obj):
+    if (name_obj.find(':')) > 0:
+        obj = name_obj.split(':')
+        parts_obj = obj[1].split("_")
+        return parts_obj
+    elif (name_obj.find("_")) > 0 and (name_obj.find(":")) < 0:
+        parts_obj = name_obj.split("_")
+        return parts_obj
+    else:
+        return name_obj
 
-
+def get_nice_name(name_obj):
+    if (name_obj.find(':')) > 0:
+        obj = name_obj.split(':')
+        parts_obj = obj[1].split("_")
+        return parts_obj
+    else:
+        parts_obj = name_obj.split("_")
+        return parts_obj
+    
 ###  ID Propio
 
-id_alumno = "MRA"
-
+proyect_id ={
+    "proyecto": "MDR",
+    "Andres":"MRA",
+    "Sara":"CFS",
+    "Xela":"GCX",
+    "Jennifer":"AMJ",
+    "Amaya":"VPA",
+    "Diego":"CTD",
+    "David":"PMD",
+    "Javier":"DJJ",
+    "Guillem":"FRG",
+    "plantilla": "XXX"
+}
 
 ###
 ### Ejercicio ID
 ###
-exercise_id = {
+task_id = {
     "script": "scr",
     "story": "str",
     "animatic": "anmtc",
@@ -23,6 +52,16 @@ exercise_id = {
     "rendering": "rdrng"
 }
 
+###
+### Sound Type
+###
+
+sound_type = {
+    "voices": "voice",
+    "soundFx": "sfx",
+    "ambients": "samb",
+    "music": "strk"
+}
 
 ###
 ###  Asset Type
@@ -30,23 +69,47 @@ exercise_id = {
 asset_type = {
     "character": "ch",
     "prop": "pr",
-    "set": "set",
+    "set": "st",
     "camera": "cm",
+    "effects": "fx",
+    "lights": "lg",
     "addon": "ad",
-    "generic": "gn"
+    "generic": "gn",
+    "library_character": "lbch",
+    "library_prop": "lbpr",
+    "library_set": "lbst",
+    "library_camera": "lbcm",
+    "library_effects": "lbfx",
+    "library_lights": "lblg"
 }
 
 ###
-###  Process ID
+###  Maya Task ID
 ###
-process_id = {
+maya_task_id = {
     "modelado": "mod",
+    "lowPoly": "modlp",
+    "highPoly":"modhp",
+    "sculpting":"modsc",
+    "mod_blendshapes":"modbs",
     "animRig": "anim",
     "layoutRig": "layout",
     "rig": "rig",
     "cloth": "cloth",
     "hair": "hair",
-    "shading": "shd"
+    "shading": "shd",
+    "lookdev": "lkdv",
+    "assetLighting": "lgt",
+    "FX": "fx",
+    ###TaskIDshots
+    "layout": "layout",
+    "blocking": "ablk",
+    "breakdowns": "abrd",
+    "refine": "aref",
+    "cache": "cache",
+    "special_effects": "fx",
+    "lightning": "light",
+    "render": "render",
 }
 ###
 ###  Maya Scene Naming
@@ -86,6 +149,7 @@ naming_maya = {
 ###  Node Location Flag
 ###
 
+
 location_flags = {
     "irrelevant": "x",
     "center": "c",
@@ -96,5 +160,6 @@ location_flags = {
     "up": "u",
     "down": "d"
 }
+
 
 pipeline_groups = ["geo", "rig", "ctl", "toolkit", "skin", "lct"]

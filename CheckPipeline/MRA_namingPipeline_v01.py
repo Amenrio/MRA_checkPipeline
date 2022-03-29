@@ -47,9 +47,10 @@ def check_duplicates(name_obj):
 
 
 # Compara con dos diccionarios si las dos primeras partes del objeto cumplen el naming (naming_maya y location_flags), si no lo cumplen, se anaden a las listas de errores
+
 def check_syntax(name_obj):
     obj = get_nice_name(name_obj)
-    if len(obj) > 3:
+    if len(obj) > 3 or len(obj) < 2:
         LE_WARNINGS.append(name_obj)
     else:
         # si obj[0] existe dentro de los valores del diccionario namingMaya
@@ -116,19 +117,19 @@ def naming_pipeline_ui(error_list, namespace_list, duplicated_list, warning_list
 
     if len(duplicated_list) > 0:
         cmds.frameLayout("Objetos con nombres duplicados: {0}".format(len(
-            duplicated_list)), p=layout, bgc=[0.40, 0.1, 0.1], bgs=True, fn="boldLabelFont")
+            duplicated_list)), p=layout, bgc=[1, 0.206, 0], bgs=True, fn="boldLabelFont")
         for j in duplicated_list:
             command = "cmds.select('{0}')".format(j)
             cmds.button(label="  {}  ".format(j), bgc=[
-                        1, 0.338, 0.338], c=command)
+                        1, 0.875, 0.231], c=command)
         cmds.separator(style='none', height=10, p=layout)
 
     if len(warning_list) > 0:
         cmds.frameLayout("Posibles fallos u objetos mal escritos: {0} ".format(
-            len(warning_list)), p=layout, bgc=[1, 0.206, 0])
+            len(warning_list)), p=layout, bgc=[0.068,0.068,0.068])
         for k in warning_list:
             command = "cmds.select('{0}')".format(k)
-            cmds.button(label="  {}  ".format(k), bgc=[1, 0.75, 0], c=command)
+            cmds.button(label="  {}  ".format(k), bgc=[0.125,0.125,0.125], c=command)
 
         cmds.separator(style='none', height=10, p=layout)
 

@@ -5,9 +5,13 @@ import MRA_namingPipeline_v01 as NP
 reload(VARS)
 reload(NP)
 def publishGroups():
-    cmds.select(all=True)
+    
 
     allObjs = cmds.ls(selection=True,dag=True, transforms=True)
+
+    if not allObjs:
+        cmds.select(all=True)
+        allObjs = cmds.ls(selection=True,dag=True, transforms=True)
 
     for o in allObjs:
         obj = NP.get_nice_name(o)
