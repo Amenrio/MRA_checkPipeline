@@ -49,7 +49,6 @@ def getLctPositions(s,listNames):
     return list_positions
 
 def parent_everything():
-    
     jnts = ["pelvis"]
     for g in grps:
         cmds.parent(g, "grp_x_rig")
@@ -77,6 +76,22 @@ def zeroOrient(o):
         cmds.setAttr(o + '.jointOrientZ' ,0)
 
 
+def create_bending_joints(joint1, joint2):
+    pos1 = cmds.xform(joint1, q = True, t = True)
+    pos2 = cmds.xform(joint2, q = True, t = True)
+    jointList = []
+    posBend01 = (pos1 + pos2) /2
+    posBend00 = (pos1 + posBend01) / 2
+    posBend02 = (pos2 + posBend01) / 2
+    bendPosition = [posBend00,posBend01,posBend02]
+    for b in bendPosition:
+
+        jointList.append(cmds.joint(name="skin_l_{}Bend",position = b))
+    for j in jointList:
+        cmds.joint(j, e=True,oj="xzy",sao="zup", ch=True, zso=True)
+        cmds.joint(jointList[-1],e=True,oj="none",zso=True)
+    cmds.select(clear=True)
+
 def run():
 
     for g in groups:
@@ -97,7 +112,7 @@ def run():
     for s in side:
         createSymmetryGrp(lct_arms,s,chestExtra,"X",limb[0])
         createSymmetryGrp(lct_legs,s,pelvis,"X",limb[1])
-    
+    create_bending_joints("skin_l_upperArm","skin_l_LowerArm")
     parent_everything()
     cmds.select(all=True,hi=True)
     joints = cmds.ls(selection=True)
