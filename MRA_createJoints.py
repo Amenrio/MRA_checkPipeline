@@ -3,12 +3,14 @@ import maya.cmds as cmds
 lct_arms = ["clavicle","upperArm", "lowerArm", "hand"]
 lct_spine = ["pelvis","spine00", "spine01", "spine02", "spine03", "spine04","chest","chestExtra"]
 lct_legs = ["upperLeg","lowerLeg","foot","toe","toeEnd"]
+bendingCtls = ["Bend00", "Bend01", "Bend02"]
 pelvis = "lct_c_pelvis"
 chestExtra = "lct_c_chestExtra"
 limb = ["Arm", "Leg"]
 grps = ["grp_x_skin","grp_x_ctl","grp_x_toolkit"]
 lct_armPosition = []
 lct_legsPosition = []
+bending_positions = []
 jointList = []
 
 side = [ "l", "r"]
@@ -49,7 +51,6 @@ def getLctPositions(s,listNames):
     return list_positions
 
 def parent_everything():
-    jnts = ["pelvis"]
     for g in grps:
         cmds.parent(g, "grp_x_rig")
     cmds.select(clear=True)
@@ -57,8 +58,19 @@ def parent_everything():
     cmds.parent("skin_c_pelvis","skin_c_root")
     for s in side:
         cmds.parent("grp_{}_skinSymmetryArm".format(s),"skin_c_chestExtra")
+
+
         cmds.parent("grp_{}_skinSymmetryLeg".format(s),"skin_c_pelvis")
 
+    cmds.select(clear=True)
+
+def create_bending(jointPrincipal,chain_name, location):
+    list_names = []
+    for b in bendingCtls:
+        list_names.append("{}{}".format(jointPrincipal, b))
+    bending_positions = getLctPositions("l",list_names)
+    create_chain(list_names,bending_positions,chain_name,location)
+    
 #Cacho de codigo reutilizado gracias Angel o/
 def zeroOrient(o):
     if cmds.nodeType(o) == 'joint':
@@ -76,21 +88,6 @@ def zeroOrient(o):
         cmds.setAttr(o + '.jointOrientZ' ,0)
 
 
-def create_bending_joints(joint1, joint2):
-    pos1 = cmds.xform(joint1, q = True, t = True)
-    pos2 = cmds.xform(joint2, q = True, t = True)
-    jointList = []
-    posBend01 = (pos1 + pos2) /2
-    posBend00 = (pos1 + posBend01) / 2
-    posBend02 = (pos2 + posBend01) / 2
-    bendPosition = [posBend00,posBend01,posBend02]
-    for b in bendPosition:
-
-        jointList.append(cmds.joint(name="skin_l_{}Bend",position = b))
-    for j in jointList:
-        cmds.joint(j, e=True,oj="xzy",sao="zup", ch=True, zso=True)
-        cmds.joint(jointList[-1],e=True,oj="none",zso=True)
-    cmds.select(clear=True)
 
 def run():
 
@@ -108,11 +105,18 @@ def run():
     for s in side:
         create_chain(lct_arms,lct_armPosition, limb[0],s)
         create_chain(lct_legs, lct_legsPosition, limb[1],s)
+        create_bending("upperArm","Arm",s)
+        create_bending("lowerArm","Arm",s)
+        create_bending("upperLeg","Leg",s)
+        create_bending("lowerLeg","Leg",s)
+        cmds.parent("skin_{}_upperArmBend00".format(s), "skin_{}_upperArm".format(s))
+        cmds.parent("skin_{}_lowerArmBend00".format(s), "skin_{}_lowerArm".format(s))
+        cmds.parent("skin_{}_upperLegBend00".format(s), "skin_{}_upperLeg".format(s))
+        cmds.parent("skin_{}_lowerLegBend00".format(s), "skin_{}_lowerLeg".format(s))
    
     for s in side:
         createSymmetryGrp(lct_arms,s,chestExtra,"X",limb[0])
         createSymmetryGrp(lct_legs,s,pelvis,"X",limb[1])
-    create_bending_joints("skin_l_upperArm","skin_l_LowerArm")
     parent_everything()
     cmds.select(all=True,hi=True)
     joints = cmds.ls(selection=True)
